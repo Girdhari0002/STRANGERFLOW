@@ -23,7 +23,7 @@ const Auth = ({ onAuthSuccess }) => {
     const endpoint = isLogin ? '/api/auth/login' : '/api/auth/signup';
 
     try {
-      const response = await fetch(`http://localhost:5051${endpoint}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -45,7 +45,7 @@ const Auth = ({ onAuthSuccess }) => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:5051/api/auth/google';
+    window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`;
   };
 
   return (

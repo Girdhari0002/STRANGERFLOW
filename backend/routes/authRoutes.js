@@ -35,7 +35,7 @@ router.get(
 
         // Redirect or send token as per frontend needs
         // For now, we'll send a script to post message to opener or just redirect with token
-        res.redirect(`http://localhost:3000/login-success?token=${token}`);
+        res.redirect(`${process.env.CLIENT_URL}/login-success?token=${token}`);
     }
 );
 

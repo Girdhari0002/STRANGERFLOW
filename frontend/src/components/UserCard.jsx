@@ -1,9 +1,10 @@
 import React from 'react';
-import { User } from 'lucide-react';
+import { User, Lock } from 'lucide-react';
 
-const UserCard = ({ user, onConnect }) => {
+const UserCard = ({ user, onConnect, isAuthenticated }) => {
     // If a user is in the onlineUsers list passed from App.jsx, they are online
     const isOnline = true;
+    const canConnect = isOnline && isAuthenticated;
 
     return (
         <div className="glass card-hover" style={{
@@ -48,12 +49,17 @@ const UserCard = ({ user, onConnect }) => {
                 style={{
                     width: '100%',
                     padding: '0.8rem',
-                    opacity: isOnline ? 1 : 0.6,
-                    cursor: isOnline ? 'pointer' : 'not-allowed'
+                    opacity: canConnect ? 1 : 0.6,
+                    cursor: canConnect ? 'pointer' : 'not-allowed',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem'
                 }}
-                disabled={!isOnline}
+                disabled={!canConnect}
             >
-                Connect
+                {!isAuthenticated && <Lock size={16} />}
+                {isAuthenticated ? 'Connect' : 'Sign in to Connect'}
             </button>
         </div>
     );

@@ -13,7 +13,7 @@ export const SocketProvider = ({ children }) => {
     const { user } = useAuth();
 
     useEffect(() => {
-        const newSocket = io('http://localhost:5051');
+        const newSocket = io(import.meta.env.VITE_API_URL);
 
         newSocket.on('connect', () => {
             console.log('✅ Connected with ID:', newSocket.id);

@@ -77,6 +77,14 @@ export const initSocket = (server) => {
             });
         });
 
+        socket.on('call-rejected', (data) => {
+            console.log(`🚫 Call rejected by ${socket.id} to ${data.to}, reason: ${data.reason}`);
+            socket.to(data.to).emit('call-rejected', {
+                from: socket.id,
+                reason: data.reason
+            });
+        });
+
         socket.on('peer-ready', (data) => {
             console.log(`🤝 Peer ${socket.id} is ready in room ${data.roomId}`);
             socket.to(data.roomId).emit('peer-ready', { id: socket.id });
